@@ -8,9 +8,7 @@ const Index = () => {
   const [pokemon, setPokemon] = useState([]);
 
   const fetchPokemon = () => {
-    PokemonApi.getPokemon()
-      .then((results) => setPokemon(results))
-      .then(() => console.log(pokemon));
+    PokemonApi.getPokemon().then((results) => setPokemon(results));
   };
 
   useEffect(() => fetchPokemon(), []);
