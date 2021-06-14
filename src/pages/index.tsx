@@ -28,7 +28,7 @@ const Index = () => {
 
   const handleSearch = () => {
     setLoading(true);
-    PokemonApi.findPokemonById(input)
+    PokemonApi.findPokemonById(input.toLowerCase())
       .then((res) => {
         setSearchResult(res);
       })
