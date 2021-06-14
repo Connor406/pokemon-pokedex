@@ -6,10 +6,10 @@ import { PokeType } from "../types";
 export const findNumForPhoto = (pokemon: PokeType) => {
   const url = pokemon.url.split("");
   let num = "00" + url[34];
-  if (url[35] !== "/") {
-    num = "0" + url[34] + url[35];
-  } else if (url[36] && url[36] !== "/") {
+  if (url[36] && url[36] !== "/") {
     num = url[34] + url[35] + url[36];
+  } else if (url[35] !== "/") {
+    num = "0" + url[34] + url[35];
   }
   return num;
 };
@@ -17,10 +17,10 @@ export const findNumForPhoto = (pokemon: PokeType) => {
 export const findNumWithoutZeroes = (pokemon: PokeType) => {
   const url = pokemon.url.split("");
   let num = url[34];
-  if (url[35] !== "/") {
-    num = url[34] + url[35];
-  } else if (url[36] && url[36] !== "/") {
+  if (url[36] && url[36] !== "/") {
     num = url[34] + url[35] + url[36];
+  } else if (url[35] !== "/") {
+    num = url[34] + url[35];
   }
   return num;
 };

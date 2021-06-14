@@ -6,8 +6,8 @@ import SinglePokemonDisplay from "../components/SinglePokemonDisplay";
 import { Box, Button, Flex } from "@chakra-ui/react";
 
 const Index = () => {
-  const [pokemon, setPokemon] = useState([]);
   const [searchResult, setSearchResult] = useState();
+  const [pokemon, setPokemon] = useState([]) as any;
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentUrl, setCurrentUrl] = useState(
@@ -40,7 +40,10 @@ const Index = () => {
   return (
     <>
       <SearchBar
-        handleLogoClick={() => setSearchResult(undefined)}
+        handleLogoClick={() => {
+          setSearchResult(undefined),
+            setCurrentUrl("https://pokeapi.co/api/v2/pokemon");
+        }}
         value={input}
         handleSubmit={() => handleSearch()}
         handleChange={(e) => setInput(e.target.value)}
@@ -61,11 +64,23 @@ const Index = () => {
           )}
         </>
       )}
+
       <Flex justifyContent="center" alignItems="center">
-        <Button variant="ghost" onClick={() => setCurrentUrl(prevUrl)}>
+        <Button
+          variant="ghost"
+          colorScheme="blue"
+          my={15}
+          onClick={() => setCurrentUrl(prevUrl)}
+        >
           Previous page
         </Button>
-        <Button variant="ghost" onClick={() => setCurrentUrl(nextUrl)}>
+
+        <Button
+          colorScheme="blue"
+          variant="ghost"
+          my={15}
+          onClick={() => setCurrentUrl(nextUrl)}
+        >
           Next page
         </Button>
       </Flex>

@@ -6,6 +6,7 @@ import {
   findNumForPhoto,
   findNumWithoutZeroes,
 } from "../utils/getNumberFromURL";
+import { capitalize } from "../utils/capitalizer";
 
 interface PokemonProps {
   pokemonList: PokeType[];
@@ -29,6 +30,12 @@ export const Pokemon: React.FC<PokemonProps> = ({ pokemonList }) => {
                   p={4}
                   m={4}
                   textAlign="center"
+                  _hover={{
+                    backgroundColor: "rgba(0, 152, 255, 0.3)",
+                    borderColor: "white",
+                    cursor: "pointer",
+                  }}
+                  transitionDuration=".5s"
                 >
                   <Image
                     backgroundColor="rgba(0, 0, 0, 0.2)"
@@ -38,8 +45,8 @@ export const Pokemon: React.FC<PokemonProps> = ({ pokemonList }) => {
                     boxSize="200px"
                     src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`}
                   ></Image>
-                  <Text>{number}</Text>
-                  <Text fontSize={20}>{pokemon.name}</Text>
+                  <Text>#{numWithoutZeroes}</Text>
+                  <Text fontSize={20}>{capitalize(pokemon.name)}</Text>
                 </Box>
               </Link>
             );

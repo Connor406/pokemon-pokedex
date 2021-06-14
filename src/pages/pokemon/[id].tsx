@@ -2,7 +2,6 @@ import { Box, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import { CharacterDisplay } from "../../components/CharacterDisplay";
-import { Wrapper } from "../../components/Wrapper";
 import { getPokemonId } from "../../utils/getNumberForPhoto";
 import { PokemonApi } from "../../components/PokemonApi";
 
@@ -27,7 +26,7 @@ const Specs: React.FC = ({}) => {
       {details ? (
         <CharacterDisplay
           pokemon={details}
-          routeNum={getPokemonId(routerValue)}
+          routeNum={getPokemonId(routerValue as string)}
         />
       ) : (
         "loading..."

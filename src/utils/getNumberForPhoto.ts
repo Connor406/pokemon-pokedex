@@ -6,6 +6,8 @@ export const getPokemonId = (noZeroNumber: string) => {
   } else if (noZeroNumber.length === 2) {
     const newValue = "0" + noZeroNumber;
     value = newValue;
+  } else if (noZeroNumber.length === 3) {
+    value = noZeroNumber;
   } else {
     null;
   }

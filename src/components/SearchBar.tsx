@@ -9,7 +9,7 @@ interface SearchBarProps {
   handleSubmit: React.FormEventHandler<HTMLInputElement> &
     React.MouseEventHandler<HTMLButtonElement> &
     React.KeyboardEventHandler<HTMLInputElement>;
-  handleLogoClick: any;
+  handleLogoClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -20,11 +20,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <Wrapper bgColor="blue">
-      <Box>
-        <Button variant="link" onClick={handleLogoClick}>
-          <Image src="/Pokemon-Logo-500x313.png" w={200} />
-        </Button>
-        <Flex w={440} mx="auto">
+      <Box minH={250}>
+        <Flex justify="center">
+          <Button variant="link" onClick={handleLogoClick}>
+            <Image src="/Pokemon-Logo-500x313.png" w={200} />
+          </Button>
+        </Flex>
+        <Flex minW={340} maxW={450} mx="auto">
           <Input
             color="white"
             placeholder="search by name"
@@ -35,14 +37,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
             onKeyPress={(e) => {
               e.key === "Enter" ? handleSubmit(e) : null;
             }}
-            my={10}
           />
           <Button
             type="submit"
             color="blue"
             onClick={handleSubmit}
             ml={2}
-            my={10}
+            my={0}
           >
             Submit
           </Button>

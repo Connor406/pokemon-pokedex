@@ -12,7 +12,11 @@ export const PokemonApi = {
   findPokemonById(id) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
       .then((res) => {
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("Oops... try another search");
+        }
       })
       .then((jsonRes) => {
         return jsonRes;
