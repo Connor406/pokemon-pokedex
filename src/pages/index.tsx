@@ -1,30 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { Pokemon } from "../components/Pokemon";
-import { PokemonApi } from "../utils/PokemonApi";
+import { PokemonApi } from "../components/PokemonApi";
 import SearchBar from "../components/SearchBar";
 import SinglePokemonDisplay from "../components/SinglePokemonDisplay";
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 
 const Index = () => {
   const [pokemon, setPokemon] = useState([]);
   const [searchResult, setSearchResult] = useState();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentUrl, setCurrentUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon"
+  );
+  const [nextUrl, setNextUrl] = useState();
+  const [prevUrl, setPrevUrl] = useState();
 
   const fetchPokemon = () => {
-    PokemonApi.getPokemon()
-      .then((results) => setPokemon(results))
+    PokemonApi.getPokemon(currentUrl)
+      .then((results) => {
+        setPokemon(results),
+          setNextUrl(results.next),
+          setPrevUrl(results.previous);
+      })
       .then(() => setLoading(false));
   };
 
   const handleSearch = () => {
     setLoading(true);
     PokemonApi.findPokemonById(input)
-      .then((res) => setSearchResult(res))
+      .then((res) => {
+        setSearchResult(res);
+      })
       .then(() => setLoading(false));
   };
 
-  useEffect(() => fetchPokemon(), []);
+  useEffect(() => fetchPokemon(), [currentUrl]);
 
   return (
     <>
@@ -42,7 +53,7 @@ const Index = () => {
         // if no value has been searched
         <>
           {searchResult === undefined ? (
-            <Pokemon pokemonList={pokemon} />
+            <Pokemon pokemonList={pokemon.results} />
           ) : (
             <SinglePokemonDisplay
               searchResult={searchResult}
@@ -50,6 +61,14 @@ const Index = () => {
           )}
         </>
       )}
+      <Flex justifyContent="center" alignItems="center">
+        <Button variant="ghost" onClick={() => setCurrentUrl(prevUrl)}>
+          Previous page
+        </Button>
+        <Button variant="ghost" onClick={() => setCurrentUrl(nextUrl)}>
+          Next page
+        </Button>
+      </Flex>
     </>
   );
 };

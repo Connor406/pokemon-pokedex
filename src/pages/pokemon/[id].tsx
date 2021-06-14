@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { CharacterDisplay } from "../../components/CharacterDisplay";
 import { Wrapper } from "../../components/Wrapper";
 import { getPokemonId } from "../../utils/getNumberForPhoto";
-import { PokemonApi } from "../../utils/PokemonApi";
+import { PokemonApi } from "../../components/PokemonApi";
 
 const Specs: React.FC = ({}) => {
   const [details, setDetails] = useState();

@@ -1,11 +1,11 @@
 export const PokemonApi = {
-  getPokemon() {
-    return fetch("https://pokeapi.co/api/v2/pokemon/")
+  getPokemon(url) {
+    return fetch(url)
       .then((resp) => {
         return resp.json();
       })
       .then((jsonRes) => {
-        return jsonRes.results;
+        return jsonRes;
       });
   },
 
