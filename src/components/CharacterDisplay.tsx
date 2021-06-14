@@ -45,7 +45,7 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({
       <Flex wrap="wrap" mt={10}>
         <Image
           src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${routeNum}.png`}
-          objectFit="cover"
+          objectFit="contain"
         />
         <Box>
           <Text fontSize={50}>{capitalize(pokemon.name)}</Text>
