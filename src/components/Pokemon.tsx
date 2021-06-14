@@ -1,6 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { PokeType } from "../types";
+import { PokemonFullType, PokeType } from "../types";
 import Link from "next/link";
 import {
   findNumForPhoto,

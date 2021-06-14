@@ -9,4 +9,5 @@ export type PokemonFullType = {
   weight: string;
   abilities: [{ slot: number; ability: { name: string } }];
   types: [{ slot: number; type: { name: string } }];
+  id: number;
 };

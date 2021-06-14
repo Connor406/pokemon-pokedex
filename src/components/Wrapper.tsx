@@ -3,8 +3,23 @@ import React from "react";
 
 interface WrapperProps {
   variant?: "sm" | "lg";
+  bgColor?: string;
 }
 
-export const Wrapper: React.FC<WrapperProps> = ({ children, variant }) => {
-  return <Box paddingX={variant === "sm" ? "25%" : "10%"}>{children}</Box>;
+export const Wrapper: React.FC<WrapperProps> = ({
+  children,
+  variant,
+  bgColor,
+}) => {
+  return (
+    <Box
+      bgColor={bgColor ? bgColor : "white"}
+      px={variant === "sm" ? "25%" : "10%"}
+      w="100%"
+      mx="auto"
+      mt={0}
+    >
+      {children}
+    </Box>
+  );
 };

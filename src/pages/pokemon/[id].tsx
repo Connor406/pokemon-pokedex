@@ -3,6 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import { CharacterDisplay } from "../../components/CharacterDisplay";
 import { Wrapper } from "../../components/Wrapper";
+import { getPokemonId } from "../../utils/getNumberForPhoto";
 import { PokemonApi } from "../../utils/PokemonApi";
 
 const Specs: React.FC = ({}) => {
@@ -10,20 +11,6 @@ const Specs: React.FC = ({}) => {
 
   const router = useRouter();
   let routerValue = router.query.id;
-
-  const getPokemonId = () => {
-    let value;
-    if (routerValue.length === 1) {
-      const newValue = "00" + routerValue;
-      value = newValue;
-    } else if (routerValue.length === 2) {
-      const newValue = "0" + routerValue;
-      value = newValue;
-    } else {
-      null;
-    }
-    return value;
-  };
 
   const getPokemon = () => {
     PokemonApi.findPokemonById(routerValue).then((results) =>
@@ -38,7 +25,10 @@ const Specs: React.FC = ({}) => {
   return (
     <Box>
       {details ? (
-        <CharacterDisplay pokemon={details} routeNum={getPokemonId()} />
+        <CharacterDisplay
+          pokemon={details}
+          routeNum={getPokemonId(routerValue)}
+        />
       ) : (
         "loading..."
       )}
