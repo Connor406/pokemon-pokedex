@@ -1,15 +1,15 @@
-import { Image } from "@chakra-ui/image";
-import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
-import React from "react";
-import { Wrapper } from "./Wrapper";
+import { Image } from "@chakra-ui/image"
+import { Box, Button, Flex, Input, Text } from "@chakra-ui/react"
+import React from "react"
+import { Wrapper } from "./Wrapper"
 
 interface SearchBarProps {
-  value: string;
-  handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  value: string
+  handleChange: React.ChangeEventHandler<HTMLInputElement>
   handleSubmit: React.FormEventHandler<HTMLInputElement> &
     React.MouseEventHandler<HTMLButtonElement> &
-    React.KeyboardEventHandler<HTMLInputElement>;
-  handleLogoClick: React.MouseEventHandler<HTMLButtonElement>;
+    React.KeyboardEventHandler<HTMLInputElement>
+  handleLogoClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -19,7 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   handleLogoClick,
 }) => {
   return (
-    <Wrapper bgColor="blue">
+    <Wrapper>
       <Box minH={250}>
         <Flex justify="center">
           <Button variant="link" onClick={handleLogoClick}>
@@ -34,23 +34,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
             value={value}
             onChange={handleChange}
             onSubmit={handleSubmit}
-            onKeyPress={(e) => {
-              e.key === "Enter" ? handleSubmit(e) : null;
+            onKeyPress={e => {
+              e.key === "Enter" ? handleSubmit(e) : null
             }}
           />
-          <Button
-            type="submit"
-            color="blue"
-            onClick={handleSubmit}
-            ml={2}
-            my={0}
-          >
+          <Button type="submit" color="blue" onClick={handleSubmit} ml={2} my={0}>
             Submit
           </Button>
         </Flex>
       </Box>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

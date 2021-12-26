@@ -1,10 +1,11 @@
+import React from "react"
 import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { Box, Text, Image, Flex, UnorderedList, ListItem, Tag, Button } from "@chakra-ui/react"
 import { useRouter } from "next/dist/client/router"
-import React from "react"
 import { PokemonFullType } from "../types"
 import { capitalize } from "../utils/capitalizer"
 import { Wrapper } from "./Wrapper"
+import { getTypeColor } from "../utils/typeColor"
 
 interface CharacterDisplayProps {
   pokemon: PokemonFullType
@@ -12,19 +13,6 @@ interface CharacterDisplayProps {
 
 export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ pokemon }) => {
   const router = useRouter()
-
-  const typeColors = [
-    { type: ["fire", "dragon", "fighting"], color: "orange" },
-    { type: ["water", "ice", "flying"], color: "cyan" },
-    { type: ["bug", "electric", "psychic"], color: "yellow" },
-    { type: ["grass"], color: "green" },
-  ]
-
-  function getTypeColor(type) {
-    const c = typeColors.find(t => t.type.includes(type))
-    if (!c) return "gray"
-    return c.color
-  }
 
   return (
     <Wrapper>
