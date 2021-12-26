@@ -1,52 +1,36 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Text,
-  Image,
-  Flex,
-  UnorderedList,
-  ListItem,
-  Tag,
-  Button,
-} from "@chakra-ui/react";
-import { useRouter } from "next/dist/client/router";
-import React from "react";
-import { PokemonFullType } from "../types";
-import { capitalize } from "../utils/capitalizer";
-import { Wrapper } from "./Wrapper";
+import { ArrowForwardIcon } from "@chakra-ui/icons"
+import { Box, Text, Image, Flex, UnorderedList, ListItem, Tag, Button } from "@chakra-ui/react"
+import { useRouter } from "next/dist/client/router"
+import React from "react"
+import { PokemonFullType } from "../types"
+import { capitalize } from "../utils/capitalizer"
+import { Wrapper } from "./Wrapper"
 
 interface CharacterDisplayProps {
-  pokemon: PokemonFullType;
-  routeNum: number;
+  pokemon: PokemonFullType
 }
 
-export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({
-  pokemon,
-  routeNum,
-}) => {
-  const router = useRouter();
+export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ pokemon }) => {
+  const router = useRouter()
 
-  const getTypeColor = (type) => {
+  const getTypeColor = type => {
     if (type === "fire" || type === "dragon" || type === "fighting") {
-      return "orange";
+      return "orange"
     } else if (type === "water" || type === "ice" || type === "flying") {
-      return "cyan";
+      return "cyan"
     } else if (type === "bug" || type === "electric" || type === "psychic") {
-      return "yellow";
+      return "yellow"
     } else if (type === "grass") {
-      return "green";
+      return "green"
     } else {
-      return "gray";
+      return "gray"
     }
-  };
+  }
 
   return (
     <Wrapper>
       <Flex wrap="wrap" mt={10}>
-        <Image
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${routeNum}.png`}
-          objectFit="contain"
-        />
+        <Image src={pokemon.sprites.other["official-artwork"].front_default} objectFit="contain" />
         <Box>
           <Text fontSize={50}>{capitalize(pokemon.name)}</Text>
           <Box border="1px" borderRadius={10} padding={4}>
@@ -67,19 +51,15 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({
                 Abilities:
               </Text>
               <UnorderedList>
-                {pokemon.abilities.map((ability) => {
-                  return (
-                    <ListItem key={ability.slot}>
-                      {capitalize(ability.ability.name)}
-                    </ListItem>
-                  );
+                {pokemon.abilities.map(ability => {
+                  return <ListItem key={ability.slot}>{capitalize(ability.ability.name)}</ListItem>
                 })}
               </UnorderedList>
             </Flex>
           </Box>
           <Text fontSize={30}>Type</Text>
           <Flex>
-            {pokemon.types.map((type) => {
+            {pokemon.types.map(type => {
               return (
                 <Tag
                   key={type.slot}
@@ -90,7 +70,7 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({
                 >
                   {capitalize(type.type.name)}
                 </Tag>
-              );
+              )
             })}
           </Flex>
           <Box>
@@ -98,19 +78,14 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({
               Stats
             </Text>
             <Box>
-              {pokemon.stats.map((stat) => {
+              {pokemon.stats.map(stat => {
                 return (
-                  <Flex
-                    key={stat.stat.name}
-                    mt={2}
-                    justifyContent="flex-start"
-                    alignItems="center"
-                  >
+                  <Flex key={stat.stat.name} mt={2} justifyContent="flex-start" alignItems="center">
                     <Text mr={4}>{stat.base_stat}</Text>
                     <ArrowForwardIcon mr={4} />
                     <Text fontWeight="bold">{capitalize(stat.stat.name)}</Text>
                   </Flex>
-                );
+                )
               })}
             </Box>
           </Box>
@@ -127,5 +102,5 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({
         go back
       </Button>
     </Wrapper>
-  );
-};
+  )
+}
