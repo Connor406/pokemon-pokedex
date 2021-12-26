@@ -32,7 +32,6 @@ export const Pokemon: React.FC = () => {
                 w="300px"
                 h="300px"
                 bgGradient={getTypeGradient(pokemon.types[0].type.name)}
-                // bgGradient={"linear(to-b, #ffd3c7, #ffffff)"}
                 borderRadius={10}
                 boxShadow="xl"
                 p={4}

@@ -25,6 +25,6 @@ export function getTypeColor(type) {
 
 export function getTypeGradient(type) {
   const c = typeColors.find(t => t.type.includes(type))
-  if (!c) return "linear(to-b, #fff6f2, #ffffff)"
+  if (!c) return "linear(to-b, #dfccff, #ffffff)"
   return c.gradient
 }

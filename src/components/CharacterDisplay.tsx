@@ -4,8 +4,7 @@ import { Box, Text, Image, Flex, UnorderedList, ListItem, Tag, Button } from "@c
 import { useRouter } from "next/dist/client/router"
 import { PokemonFullType } from "../types"
 import { capitalize } from "../utils/capitalizer"
-import { Wrapper } from "./Wrapper"
-import { getTypeColor } from "../utils/typeColor"
+import { getTypeColor, getTypeGradient } from "../utils/typeColor"
 
 interface CharacterDisplayProps {
   pokemon: PokemonFullType
@@ -15,7 +14,12 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ pokemon }) =
   const router = useRouter()
 
   return (
-    <Wrapper>
+    <Box
+      bgGradient={getTypeGradient(pokemon.types[0].type.name)}
+      w="100vw"
+      h="100vh"
+      pos="absolute"
+    >
       <Flex wrap="wrap" mt={10}>
         <Image src={pokemon.sprites.other["official-artwork"].front_default} objectFit="contain" />
         <Box>
@@ -88,6 +92,6 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ pokemon }) =
       >
         go back
       </Button>
-    </Wrapper>
+    </Box>
   )
 }
