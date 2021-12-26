@@ -1,9 +1,9 @@
 import React from "react"
-import { ArrowForwardIcon } from "@chakra-ui/icons"
-import { Box, Text, Image, Flex, UnorderedList, ListItem, Tag, Button } from "@chakra-ui/react"
+import StatCard from "./StatCard"
+import { Box, Button, Flex, Image } from "@chakra-ui/react"
+import { motion } from "framer-motion"
 import { useRouter } from "next/dist/client/router"
 import { PokemonFullType } from "../types"
-import { capitalize } from "../utils/capitalizer"
 import { getTypeColor, getTypeGradient } from "../utils/typeColor"
 
 interface CharacterDisplayProps {
@@ -13,6 +13,8 @@ interface CharacterDisplayProps {
 export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ pokemon }) => {
   const router = useRouter()
 
+  const MotionImage = motion(Image)
+
   return (
     <Box
       bgGradient={getTypeGradient(pokemon.types[0].type.name)}
@@ -21,66 +23,14 @@ export const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ pokemon }) =
       pos="absolute"
     >
       <Flex wrap="wrap" mt={10}>
-        <Image src={pokemon.sprites.other["official-artwork"].front_default} objectFit="contain" />
-        <Box>
-          <Text fontSize={50}>{capitalize(pokemon.name)}</Text>
-          <Box border="1px" borderRadius={10} padding={4}>
-            <Flex>
-              <Text fontWeight="bold" mr={2}>
-                Height:
-              </Text>
-              {pokemon.height} feet
-            </Flex>
-            <Flex>
-              <Text fontWeight="bold" mr={2}>
-                Weight:
-              </Text>
-              {pokemon.weight} lbs
-            </Flex>
-            <Flex wrap="wrap">
-              <Text fontWeight="bold" mr={4}>
-                Abilities:
-              </Text>
-              <UnorderedList>
-                {pokemon.abilities.map(ability => {
-                  return <ListItem key={ability.slot}>{capitalize(ability.ability.name)}</ListItem>
-                })}
-              </UnorderedList>
-            </Flex>
-          </Box>
-          <Text fontSize={30}>Type</Text>
-          <Flex>
-            {pokemon.types.map(type => {
-              return (
-                <Tag
-                  key={type.slot}
-                  w={20}
-                  colorScheme={getTypeColor(type.type.name)}
-                  justifyContent="center"
-                  m={2}
-                >
-                  {capitalize(type.type.name)}
-                </Tag>
-              )
-            })}
-          </Flex>
-          <Box>
-            <Text fontSize={30} mt={10}>
-              Stats
-            </Text>
-            <Box>
-              {pokemon.stats.map(stat => {
-                return (
-                  <Flex key={stat.stat.name} mt={2} justifyContent="flex-start" alignItems="center">
-                    <Text mr={4}>{stat.base_stat}</Text>
-                    <ArrowForwardIcon mr={4} />
-                    <Text fontWeight="bold">{capitalize(stat.stat.name)}</Text>
-                  </Flex>
-                )
-              })}
-            </Box>
-          </Box>
-        </Box>
+        <MotionImage
+          src={pokemon.sprites.other["official-artwork"].front_default}
+          objectFit="contain"
+          initial={{ x: -400 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.5, type: "spring" }}
+        />
+        <StatCard pokemon={pokemon} />
       </Flex>
 
       <Button
